@@ -4,6 +4,6 @@
 ## IMPORTANT: https://dba.stackexchange.com/questions/43920/why-does-pg-lsclusters-not-list-my-postgres-cluster
 ### Use postgres common tools consistently, as they are just wrappers 
 
-initdb -D (directory_for_db) => initialize database cluster more on: https://www.postgresql.org/docs/9.5/static/creating-cluster.html
-postgres -D (dircetory_for_db) => starts database server options for pointing to different conf files on: (https://stackoverflow.com/questions/37861262/create-multiple-postgres-instances-on-same-machine)
+pg_ctl -D (directory_for_db) initdb => initialize database cluster more on: https://www.postgresql.org/docs/9.5/static/creating-cluster.html
+pg_ctl -D (directory_for_db) -o "-p PORT_NUM" -l (dircetory_for_log) => starts database server options for pointing to different conf files on: (https://stackoverflow.com/questions/37861262/create-multiple-postgres-instances-on-same-machine)
 
