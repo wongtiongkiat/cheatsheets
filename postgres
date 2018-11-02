@@ -1,0 +1,5 @@
+# postgres cheatsheet
+
+initdb -D (directory_for_db) => initialize database cluster more on: initdb -D /usr/local/pgsql/data
+postgres -D (dircetory_for_db) => starts database server
+
