@@ -1,2 +1,7 @@
 # Search files
-find / -name program_name - find program_name in the environment
+find / -name program_name => find program_name in the environment
+
+# Delete files
+find . -name "*.bak" -type f -delete => delete everything of extension
+rm /path/to/directory/* => to remove everything in a directory
+rm -r /path/to/directory/* => remove everything including subdirectories
