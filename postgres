@@ -7,3 +7,5 @@
 pg_createcluster -d /path/to/data => initialize database cluster more on: https://www.postgresql.org/docs/9.5/static/creating-cluster.html
 pg_ctlcluster -D (directory_for_db) -o "-p PORT_NUM" -l (dircetory_for_log) => starts database server options for pointing to different conf files on: (https://stackoverflow.com/questions/37861262/create-multiple-postgres-instances-on-same-machine)
 
+psql -h (postgresql_loc) -p (port_id) pgbouncer => connect to pg bouncer
+show databases; => show all databases
