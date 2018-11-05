@@ -5,3 +5,9 @@ find / -name program_name => find program_name in the environment
 find . -name "*.bak" -type f -delete => delete everything of extension
 rm /path/to/directory/* => to remove everything in a directory
 rm -r /path/to/directory/* => remove everything including subdirectories
+
+# Processes
+ps ax => list down all the processes 
+netstat -nlp => list down all processes using network connection
+ps ls (process_id) => get detailed process information of process_id
+
