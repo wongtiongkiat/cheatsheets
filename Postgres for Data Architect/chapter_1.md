@@ -61,8 +61,7 @@ pg_ctl: server is running (PID: 1566)
 [postgres@MyCentOS 9.3]$ head -1 postmaster.pid
 1566
 ```
-
-(postmaster is an obsolete alias for postgres)[https://dba.stackexchange.com/questions/102453/why-have-both-a-postmaster-and-postgres-executable]
+[postmaster is an obsolete alias for postgres](https://dba.stackexchange.com/questions/102453/why-have-both-a-postmaster-and-postgres-executable)
 `/usr/local/pgsql/bin/postmaster` does the following:
 * the main process for starting out other processes
 * one postmaster always manages the data from exactly one database cluster
