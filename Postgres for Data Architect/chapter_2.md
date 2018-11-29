@@ -60,5 +60,41 @@ INSERT 0 5000000
 ```
 
 
+#### WAL logs
 
+* At checkpoint time all data are flushed onto the disk, and a **special checkpoint** is written to the log file.
+* When crash recovery procedure happens, it looks at the latest **special checkpoint** from which `REDO` operation should happen.
+* After a checkpoint, previous log segments before the checkpoint are no longer needed, thus can be discarded/removed as free space.
 
+#### When determine checkpoint to occur?
+
+* checkpoint_segments
+* checkpoint_timeout
+* checkpoint_completion_target
+
+#### checkpoint_segments
+
+* default -> 3 checkpoint_segments, each WAL segment is 16 MB, once 3 WAL segments of changes has been made, checkpoint will occur.
+
+#### checkpoint_timeout
+
+* time period has been elapsed, when timeout happens the checkpoint will occur.
+
+#### checkpoint_completion_target
+
+* how quickly should checkpointing process finish in each iteration => default value 0.5, when let's say the value increased to 0.9 it will spread the checkpoint over to a longer period.
+
+#### WAL Buffer and the WAL writer process
+
+* Changes are first made to WAL buffer, then flushed onto WAL segment each in 16MB sizes
+
+```
+[postgres@MyCentOS pg_xlog]$ pwd
+/pgdata/9.3/pg_xlog
+[postgres@MyCentOS pg_xlog]$ ls -alrt
+total 16396
+drwx------.  2 postgres postgres     4096 Oct 13 13:23 archive_status
+drwx------.  3 postgres postgres     4096 Oct 13 13:23 .
+drwx------. 15 postgres postgres     4096 Nov 15 20:17 ..
+-rw-------.  1 postgres postgres 16777216 Nov 15 20:17 000000010000000000000001
+```
