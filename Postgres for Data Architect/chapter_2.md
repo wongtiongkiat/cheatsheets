@@ -24,7 +24,7 @@
 #### Shared buffer
 Amount of memory reserved for shared memory dedicated in `postgresql.conf`, used for caching. Note that there are many **other** caches, such as `OS cache`, `disk controller cache`, `disk drive cache` and etc. Large cache may not necessary help as bigger cache usually mean more time to flush into physical drive.
 
-![database_cache_diagram.jpg](database_cache_diagram.jpg)
+![database_cache_diagram.jpg](./img/database_cache_diagram.jpg)
 
 * Database will check for whether if the data exists in the buffer, thus reducing physical I/O load.
 * Most data related fetches/writes will happen in the buffer.
@@ -39,7 +39,7 @@ Check on the book for knowing how to read shared buffer
 
 * It is the job of checkpointer process to write dirty buffers (changes to the data that are not written to the data files) into the data file. When a checkpoint happen all dirty pages are written to tables and index files. WAL log is applied up to this checkpoint.
 
-![pgdata_directories_pages.jpg](pgdata_directories_pages.jpg)
+![pgdata_directories_pages.jpg](./img/pgdata_directories_pages.jpg)
 
 * Image above shows that for each database, we have files for tables where within the files data are organized in blocks.
 
