@@ -37,7 +37,7 @@ Check on the book for knowing how to read shared buffer
 
 * Check on the book for knowing how to check size of blocks/pages
 
-* It is the job of checkpointer process to write dirty buffers (changes to the data that are not written to the data files) into the data file. When a checkpoint happen all dirty pages are written to tables and index files. WAL log is applied up to this checkpoint**.
+* It is the job of checkpointer process to write dirty buffers (changes to the data that are not written to the data files) into the data file. When a checkpoint happen all dirty pages are written to tables and index files. WAL log is applied up to this checkpoint.
 
 ![pgdata_directories_pages.jpg](pgdata_directories_pages.jpg)
 
