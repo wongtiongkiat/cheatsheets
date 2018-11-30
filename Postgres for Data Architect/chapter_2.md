@@ -133,3 +133,12 @@ wal_level = archive             # minimal, archive, or hot_standby
 #wal_receiver_timeout = 60s           # time that receiver waits for
 ```
 
+#### background writer
+* write specific dirty buffers based on algoirthm, where as checkpointer writes all of the dirty buffers.
+* process takes consideration of shared memory usage, and which block have been used/accessed recently.
+* this is to make sure free buffers are available to use.
+
+
+![commits_checkpoints_bg_writer_difference.jpg](img/commits_checkpoints_bg_writer_difference.jpg)
+
+[Here is a very good link consolidating all different type of buffers](http://www.postgresql.fastware.com/blog/back-to-basics-with-postgresql-memory-components)
