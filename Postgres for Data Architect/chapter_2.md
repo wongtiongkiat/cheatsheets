@@ -62,7 +62,8 @@ INSERT 0 5000000
 
 #### WAL logs
 
-* At checkpoint time all data are flushed onto the disk, and a **special checkpoint** is written to the log file.
+* [From postgres documentation](https://www.postgresql.org/docs/10/sql-checkpoint.html): A checkpoint is a point in the write-ahead log sequence at which all data files have been updated to reflect the information in the log. All data files will be flushed to disk.
+* At checkpoint time all data are flushed onto the disk, and a **special checkpoint** is written to the log file. 
 * When crash recovery procedure happens, it looks at the latest **special checkpoint** from which `REDO` operation should happen.
 * After a checkpoint, previous log segments before the checkpoint are no longer needed, thus can be discarded/removed as free space.
 
@@ -98,3 +99,37 @@ drwx------.  3 postgres postgres     4096 Oct 13 13:23 .
 drwx------. 15 postgres postgres     4096 Nov 15 20:17 ..
 -rw-------.  1 postgres postgres 16777216 Nov 15 20:17 000000010000000000000001
 ```
+
+* there are functions related to WAL used for archival, recovery and etc, example: `pg_switch_xlog` moves to the next transaction log file.
+* WALs are mostly writes and rarely read when wal is read it usually is because of : `recovery`, `server startup`, `replication`
+
+#### Recovery
+
+* WAL's primary concept is to recover transactions have been commited but not yet updated in the database file system. All changes made to the database will be recorded in WAL segments.
+* Loss of WAL files means loss of transactions.
+
+#### Incremental backup and point-in-time recovery
+
+* Snapshot of database filesystem (postgres filesystem) can be taken, and followed by setup of WAL archival process.
+* The snapshot does not have to be consistent, as we can always just use the snapshot and perform point-in-time recovery (replay WAL segments until a specific transaction)
+
+
+#### Replication
+
+* Since all changes happened in the database will be recorded in WAL segment, why not just use those to get a stand-by server ready for failover.
+* WAL can also be thought of as a cushion between the actual data and WAL buffer, so that a transaction does not result in immediate data write.
+
+#### Key parameters related to WALs
+```
+[postgres@MyCentOS 9.3]$ grep wal postgresql.conf 
+wal_level = archive             # minimal, archive, or hot_standby
+#wal_sync_method = fsync        # the default is the first option
+#wal_buffers = -1               # min 32kB, -1 sets based on shared_buffers
+#wal_writer_delay = 200ms       # 1-10000 milliseconds
+#max_wal_senders = 0            # max number of walsender processes
+#wal_keep_segments = 0          # in logfile segments, 16MB each; 0 disables
+#wal_sender_timeout = 60s	# in milliseconds; 0 disables
+#wal_receiver_status_interval = 10s   # send replies at least this often
+#wal_receiver_timeout = 60s           # time that receiver waits for
+```
+
