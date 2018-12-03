@@ -161,4 +161,5 @@ wal_level = archive             # minimal, archive, or hot_standby
 * Receiver on slave receives the WALs
 
 #### work_mem
-
+* work_mem is used by PostgreSQL for internal sort operations and hash tables, if the operation does not fit in the work_mem, it may switch to disk files (which is terribly slow).
+* 
