@@ -138,7 +138,27 @@ wal_level = archive             # minimal, archive, or hot_standby
 * process takes consideration of shared memory usage, and which block have been used/accessed recently.
 * this is to make sure free buffers are available to use.
 
-
 ![commits_checkpoints_bg_writer_difference.jpg](img/commits_checkpoints_bg_writer_difference.jpg)
 
 [Here is a very good link consolidating all different type of buffers](http://www.postgresql.fastware.com/blog/back-to-basics-with-postgresql-memory-components)
+
+
+#### Vacuum 
+* PostgreSQL does not immediately removed deleted tuples from data files, when a record is updated it is two statements (mark delete and insert).  
+* Tuples marked as delete are not removed until vacuum process finishes.
+* Vacuum does not lock the table.
+
+#### Vacuum Full
+* In additional to vacuum, it also reorder the table data which requires an exclusive lock on table.
+* Vacuum full can create new files, copies over the records that are not dead and then empty the original files
+
+
+#### Stats collector 
+* Collects statistics of the database, an optioanl process where default value is on.
+
+#### WAL sender and reciver
+* Sender process sends WALs to the standby server
+* Receiver on slave receives the WALs
+
+#### work_mem
+
