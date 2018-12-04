@@ -171,4 +171,4 @@ wal_level = archive             # minimal, archive, or hot_standby
 * used by maintenance operations such as vacuum, creating an index, vacuuming, reindexing and etc.
 
 The picture below sums up all the different buffers for database
-[different_buffers.jpg](./img/different_buffers.jpg)
+![different_buffers.jpg](./img/different_buffers.jpg)
