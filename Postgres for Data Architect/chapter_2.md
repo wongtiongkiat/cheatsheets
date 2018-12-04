@@ -161,5 +161,14 @@ wal_level = archive             # minimal, archive, or hot_standby
 * Receiver on slave receives the WALs
 
 #### work_mem
-* work_mem is used by PostgreSQL for internal sort operations and hash tables, if the operation does not fit in the work_mem, it may switch to disk files (which is terribly slow).
-* 
+* `work_mem` is used by PostgreSQL for internal sort operations and hash tables, if the operation does not fit in the `work_mem`, it may switch to disk files (which is terribly slow).
+* `work_mem` is allocated for each user that connects to the client, so if there are 100 `(max_connection)` we might end up having 3gb.
+
+`\timing on` to display execution time for each statement
+
+
+#### maintenance_work_mem
+* used by maintenance operations such as vacuum, creating an index, vacuuming, reindexing and etc.
+
+The picture below sums up all the different buffers for database
+[different_buffers.jpg](./img/different_buffers.jpg)
