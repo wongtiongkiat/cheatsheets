@@ -88,4 +88,9 @@ So, the objects in a PostgreSQL cluster can be represented, as shown in the foll
 #### Roles & Privileges
 * Roles is almost the same as user, a role can be a user or a group of users. 
 * `CREATE USER` and `CREATE ROLE` are almost the same, the only exception being `CREATE USER` implies LOGIN privilege, where as `CREATE ROLE` does not.
-* 
+* `ALTER ROLE my_role WITH login;`, this provide login privilege to my_role.
+* `postgres` role as it has the superuser attribute, but it does not have to be `postgres`, any user can be superuser.
+* `postgres=# \du+` to see all of the database user and their roles.
+
+
+
