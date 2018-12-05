@@ -50,16 +50,42 @@ pc.relnamespace=pn.oid  where relname IN ('mytemp','emp');
  
  Temporary table is a subset of unlogged table
  
- #### Unlogged table
- * allows different session to share the same table, but still willing to compromise on durability.
+#### Unlogged table
+* allows different session to share the same table, but still willing to compromise on durability.
  Example: 
  ```CREATE  UNLOGGED TABLE myunloggedtbl(id int);```
- * Data inserted into this table will be accessible from all sessions. The changes to the table data will survive normal restarts, but might not survive crashes.
+* Data inserted into this table will be accessible from all sessions. The changes to the table data will survive normal restarts, but might not survive crashes.
  
- #### Views
- * Views are jsut stored queries, they do not store data.
- * When we execute a query against a view, the underlying tables anre queried.
- * Views can be used as a security measure to make sure that user can only see a subset of records so we can allow user with different level of accesss.
- * View also make it easier to retrieve data or simplify complicated queries.
+#### Views
+* Views are jsut stored queries, they do not store data.
+* When we execute a query against a view, the underlying tables anre queried.
+* Views can be used as a security measure to make sure that user can only see a subset of records so we can allow user with different level of accesss.
+* View also make it easier to retrieve data or simplify complicated queries.
  
+#### Database
+* A collection of SQL objects, to access other databases dbliink or foreign data wrapper is used.
  
+#### Schema
+* Container within a database, any database object (table, index, view, etc) is created under a schema. 
+* Schema is used to group related objects within the same database.
+* When an object does not have a schema specified, it will be assigned to a default schema called `public`
+* Users cannot access any object in schemas they do not own
+* To allow users to make use of the objects in other schemas, additional privileges (for example, SELECT and UPDATE on tables) must be granted, as appropriate for the object.
+
+#### search_path
+* very similar to PATH environment variable in Unix and Windows OS.
+* PostgreSQL uses a setting called `search_path` to figure out where it should search for the object user is trying to access.
+* search_p`ath` is the one setting that can be set in different ways (configuration file and command line) at different levels (user, database, and session).
+more details in the book chapter 3, `Databases, schemas, and search_path`.
+
+So, the objects in a PostgreSQL cluster can be represented, as shown in the following diagram:
+![database_cluster_breakdown.jpg](./img/database_cluster_breakdown.jpg)
+
+#### Schema use cases
+* In a system where users deal with mutually-exclusive data sets, it's possible to create one schema per user and ensure security by providing each user access to his/her schema alone.
+
+
+#### Roles & Privileges
+* Roles is almost the same as user, a role can be a user or a group of users. 
+* `CREATE USER` and `CREATE ROLE` are almost the same, the only exception being `CREATE USER` implies LOGIN privilege, where as `CREATE ROLE` does not.
+* 
