@@ -37,3 +37,13 @@ SQL standard isolation levels:
 
 => Serializable or repeatable read transactions use one snapshot for the entire transaction
 => read committed transaction uses a new snapshot for each statement.
+
+#### MVCC
+* implemented using isolation level, key rule is that readers should not block writer, writer should not block readers.
+* postgreSQL uses transaction id to achieve MVCC, each transaction will see the effect of all transaction that were started and committed before the current transaction started.
+* there are quite a few columns used to generate snapshots of data, but the two important ones are: `xmin` and `xmax`
+* `xmin` - holds the transaction id at which new transaction is created.
+* `xmax` - holds the transaction id at which there is a delete, or marked as delete. 
+=> read more on chapter 4 on this
+
+
