@@ -1,0 +1,110 @@
+Navigation
+% - go to the matching character 
+
+H - first line of the screen (high)
+M - middle line of the screen (middle)
+L - last line of the screen (low)
+
+G - last line of the file
+gg - first line of the file
+
+Shifting around screen
+zz - center screen based on cursor
+zt - to the top of the screen
+zb - to the bottom of the screen
+
+CTags
+:tag (subroutine/class) - jump to tag
+vim -t <tag> - open vim at tag location
+C+] - jump into definition
+C+t - jump back from definition
+
+Insert mode
+i - insert before the cursor
+I - insert at the beginning of the line
+a - insert (append) after the cursor
+A - insert (append) at the end of the line
+o - append (open) a new line below the current line
+O - append (open) a new line above the current line
+ea - insert (append) at the end of the word
+
+Cutting
+dw - delete until next word
+d$ - delete until end of the line;
+dt(char) - delete until (char);
+
+Yanking
+yy - yank current line
+yt$ - yank from cursor to the end of the line
+yt(char) - yank until (char)
+
+p - paste after cursor
+P - paste before cursor
+
+Navigate around tabs
+:tabe - open new tab
+:tabn (index) - go to tab (index)
+:tabm (index) - swap index of current tab with tab (index)
+gt - move to forward tab
+gT - move to previous tab
+
+## Working with multiple things
+
+Current Window
+:e <tab> - list files from current directory
+
+Buffers
+:e (file) - load a new file in buffer
+:badd <file> - load to buffer
+:bd - close current buffer
+:b(index) - to buffer (index)
+:bnext - next buffer
+:bprevious - previous buffer
+:buffers - list all buffers
+:bfirst - move to first buffer
+:blast - move to last buffer
+:ball - load all buffer
+
+Tabs (workspace more discussion [here](https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs)
+:tabnew (file) - load a new file in tab
+:tabn(index) - to tab (index)
+:tabclose - close current tab
+:tabnext - next tab
+:tabprevious - previous tab
+:tabfirst - first tab
+:tablast - last tab
+:tabs - list all tabs
+gt(normal mode) - go to next tab 
+
+Window splitting
+:new <file>
+set splitbelow
+set splitright
+
+Marks 
+mY - make Y a global mark (normal mode)
+my - make y a local mark (normal mode)
+`Y - to go to the marker (normal mode)
+:marks - to see marks
+
+Folding
+zc - fold code
+zo - open fold
+zM - fold everything
+zR - unfold everything
+
+Registers
+can be used in visual mode
+“ay - yank into register a (normal mode)
+“ap - paste from register a (normal mode)
+:registers - list all registers
+
+Macro
+q(macro_name) - start record
+q - stop record
+@(macro_name) - play once 
+N@(macro_name) - play record N times
+
+Sources
+https://vim.rtorr.com/
+https://ricostacruz.com/til/navigate-code-with-ctags
